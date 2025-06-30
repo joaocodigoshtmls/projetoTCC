@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Login from './pages/Login';
-import Cadastro from './pages/Cadastro';
-import Home from './pages/Home';
-import Dashboard from './pages/Dashboard';
+import Login from './pages/Login/index';
+import Cadastro from './pages/Cadastro/index';
+import Home from './pages/Home/index';
+import Dashboard from './pages/Dashboard/Dashboard';
 import MainLayout from './layout/MainLayout';
 
 function AppContent() {
