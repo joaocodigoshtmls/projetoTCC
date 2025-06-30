@@ -1,4 +1,8 @@
+import express from 'express';
 import bcrypt from 'bcrypt';
+import pool from '../db.js';
+
+const router = express.Router();
 
 // Rota para cadastrar usuário manualmente
 router.post('/cadastro', async (req, res) => {
@@ -7,7 +11,6 @@ router.post('/cadastro', async (req, res) => {
   try {
     const conn = await pool.getConnection();
 
-    // Verifica se já existe email ou CPF
     const [existe] = await conn.query(
       'SELECT id FROM usuarios_comuns WHERE email = ? OR cpf = ?',
       [email, cpf]
@@ -32,3 +35,5 @@ router.post('/cadastro', async (req, res) => {
     res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
   }
 });
+
+export default router;
