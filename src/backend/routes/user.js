@@ -1,38 +1,45 @@
-import express from 'express';
-import bcrypt from 'bcrypt';
-import pool from '../db.js';
+import bcrypt from "bcrypt"; // se ainda não tiver
+import express from "express";
+import pool from "../db.js";
 
 const router = express.Router();
 
-// Rota para cadastrar usuário manualmente
-router.post('/cadastro', async (req, res) => {
-  const { nome, email, senha, telefone, cpf } = req.body;
+// ROTA DE LOGIN MANUAL
+router.post('/login', async (req, res) => {
+  const { email, senha } = req.body;
 
   try {
     const conn = await pool.getConnection();
 
-    const [existe] = await conn.query(
-      'SELECT id FROM usuarios_comuns WHERE email = ? OR cpf = ?',
-      [email, cpf]
-    );
-
-    if (existe) {
-      conn.release();
-      return res.status(400).json({ error: 'Email ou CPF já cadastrados.' });
-    }
-
-    const senhaCriptografada = await bcrypt.hash(senha, 10);
-
-    await conn.query(
-      'INSERT INTO usuarios_comuns (nome, email, senha, telefone, cpf) VALUES (?, ?, ?, ?, ?)',
-      [nome, email, senhaCriptografada, telefone, cpf]
+    const resultado = await conn.query(
+      'SELECT * FROM usuarios_comuns WHERE email = ?',
+      [email]
     );
 
     conn.release();
-    res.status(201).json({ message: 'Usuário cadastrado com sucesso.' });
+
+    if (resultado.length === 0) {
+      return res.status(401).json({ error: 'Email ou senha inválidos.' });
+    }
+
+    const usuario = resultado[0];
+    const senhaConfere = await bcrypt.compare(senha, usuario.senha);
+
+    if (!senhaConfere) {
+      return res.status(401).json({ error: 'Email ou senha inválidos.' });
+    }
+
+    res.json({
+      message: 'Login bem-sucedido',
+      usuario: {
+        id: usuario.id,
+        nome: usuario.nome,
+        email: usuario.email
+      }
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Erro ao cadastrar usuário.' });
+    res.status(500).json({ error: 'Erro no servidor ao fazer login.' });
   }
 });
 

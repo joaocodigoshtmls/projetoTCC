@@ -51,28 +51,81 @@ function Cadastro() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="flex w-full max-w-4xl bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-purple-200">
+      <div className="flex w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden">
+        {/* Imagem */}
         <div className="w-1/2 hidden md:block">
           <img
             src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d"
-            alt="Login visual"
+            alt="Cadastro visual"
             className="object-cover w-full h-full"
           />
         </div>
 
-        <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-3xl font-semibold text-center text-blue-600">Crie sua conta</h2>
+        {/* Formulário */}
+        <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
+          <h2 className="text-3xl font-bold text-center text-purple-700">Crie sua conta</h2>
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-            <input type="text" name="fullName" placeholder="Nome completo" value={formData.fullName} onChange={handleChange} required className="w-full px-4 py-2 border rounded-xl" />
-            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-2 border rounded-xl" />
-            <input type="password" name="password" placeholder="Senha" value={formData.password} onChange={handleChange} required className="w-full px-4 py-2 border rounded-xl" />
-            <input type="password" name="confirmPassword" placeholder="Confirmar senha" value={formData.confirmPassword} onChange={handleChange} required className="w-full px-4 py-2 border rounded-xl" />
-            <input type="tel" name="phone" placeholder="Telefone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-2 border rounded-xl" />
-            <input type="text" name="cpf" placeholder="CPF" value={formData.cpf} onChange={handleChange} required className="w-full px-4 py-2 border rounded-xl" />
+            <input
+              type="text"
+              name="fullName"
+              placeholder="Nome completo"
+              value={formData.fullName}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="Senha"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirmar senha"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Telefone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input
+              type="text"
+              name="cpf"
+              placeholder="CPF"
+              value={formData.cpf}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
 
-            <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition duration-300">
+            <button
+              type="submit"
+              className="w-full py-2 text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-purple-600 hover:to-blue-600 transition duration-300 shadow-md"
+            >
               Cadastrar
             </button>
           </form>
